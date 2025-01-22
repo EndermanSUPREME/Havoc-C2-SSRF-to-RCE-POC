@@ -10,4 +10,6 @@ The RCE vulnerability works by exploiting a flaw in Havoc's Payload creation by 
 
 With a teamserver's websocket port being inaccessible to the public, we can create functions that create WebSocket frames that we can push to the Closed/Filtered Teamserver port via the SSRF.
 
+*Note - The Teamserver needs to be hosted on a regular web-socket (ws://) for this POC to work*
+
 <i>Hackers (1995) - <b>Hack The Planet!</b></i>
