@@ -271,6 +271,7 @@ def create_teamserver_auth(teamserver_username, teamserver_passwd):
 
 def create_demon_listener(teamserver_username, user_agent, listener_name):
     time_stamp = datetime.now().strftime("%H:%M:%S")
+    rPort = str(random.randint(1050, 65535)) # payload takes this value as a string not an int
     payload = {
         "Body": {
             "Info": {
@@ -280,11 +281,11 @@ def create_demon_listener(teamserver_username, user_agent, listener_name):
                 "HostRotation": "round-robin",
                 "Hosts": "0.0.0.0",
                 "Name": listener_name,
-                "PortBind": "443",
-                "PortConn": "443",
-                "Protocol": "Https",
+                "PortBind": rPort,
+                "PortConn": rPort,
+                "Protocol": "Https", # can be modified if you wish
                 "Proxy Enabled": "false",
-                "Secure": "true",
+                "Secure": "true", # can be modified if you wish
                 "Status": "online",
                 "Uris": "",
                 "UserAgent": user_agent,
